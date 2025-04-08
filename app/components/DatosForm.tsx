@@ -9,6 +9,20 @@ interface DatosResponse {
   [key: string]: any;
 }
 
+// Interfaz compatible con la función exportToCSV
+interface DataItem {
+  process: string;
+  code: string;
+  totalQty: number;
+  totalAmount: number;
+  approvedQty: number;
+  approvedAmount: number;
+  rejectedQty?: number;
+  rejectedAmount?: number;
+  month?: string;
+  status?: string;
+}
+
 export default function DatosForm() {
   const [pais, setPais] = useState('');
   const [periodo, setPeriodo] = useState('');
@@ -131,7 +145,17 @@ export default function DatosForm() {
               Resultados del Análisis
             </h2>
             <button
-              onClick={() => exportToCSV(datos, pais, periodo)}
+              onClick={() => {
+                // Convertir datos a formato DataItem[] antes de exportar
+                if (datos) {
+                  const formattedData = Array.isArray(datos) ? datos : Object.values(datos);
+                  // Asegurarse de que los datos tienen la estructura correcta
+                  const validData = formattedData.filter(item => 
+                    item && typeof item === 'object' && 'process' in item && 'code' in item
+                  );
+                  exportToCSV(validData as DataItem[], pais, periodo);
+                }
+              }}
               className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
