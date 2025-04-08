@@ -4,7 +4,8 @@ const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = '0.0.0.0';
-const port = process.env.PORT || 3000;
+// Usar el puerto asignado por Render, o 10000 como fallback
+const port = parseInt(process.env.PORT || '10000', 10);
 
 // Preparar la aplicación Next.js
 const app = next({ dev, hostname, port });
