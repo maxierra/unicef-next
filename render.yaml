@@ -2,8 +2,10 @@ services:
   - type: web
     name: bizland-app
     env: node
-    buildCommand: npm install && npm run render-build
-    startCommand: npm run render-start
+    buildCommand: chmod +x ./build.sh && ./build.sh
+    startCommand: npm run start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 3000
