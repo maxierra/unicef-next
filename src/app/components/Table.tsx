@@ -36,6 +36,27 @@ export default function Table({ data, country }: TableProps) {
   const columnHelper = createColumnHelper<DataItem>();
 
   const columns = [
+    columnHelper.accessor('status', {
+      header: 'Estado',
+      cell: (info) => {
+        const statusValue = info.getValue();
+        // Convertir a minúsculas para la comparación
+        const status = typeof statusValue === 'string' ? statusValue.toLowerCase() : '';
+        let statusClass = '';
+        let displayText = statusValue || '';
+        
+        // Añadir clases de color según el estado
+        if (status === 'open' || status === 'abierto') {
+          statusClass = 'bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium';
+        } else if (status === 'presented' || status === 'presentado') {
+          statusClass = 'bg-red-100 text-red-800 px-2 py-1 rounded-full font-medium';
+        } else if (status === 'finished' || status === 'finalizado') {
+          statusClass = 'bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium';
+        }
+        
+        return <span className={statusClass}>{displayText}</span>;
+      },
+    }),
     columnHelper.accessor('code', {
       header: 'Código',
       cell: (info) => info.getValue(),
@@ -71,10 +92,6 @@ export default function Table({ data, country }: TableProps) {
     columnHelper.accessor('rejectedAmount', {
       header: 'Monto Rechazado',
       cell: (info) => formatCurrency(info.getValue(), country),
-    }),
-    columnHelper.accessor('status', {
-      header: 'Estado',
-      cell: (info) => info.getValue(),
     }),
   ];
 
