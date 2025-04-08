@@ -165,7 +165,14 @@ export default function DatosForm() {
             </button>
           </div>
           <div className="overflow-x-auto">
-            <Table data={datos} country={pais} />
+            {datos && (
+              <Table 
+                data={Array.isArray(datos) ? datos : Object.values(datos).filter(item => 
+                  item && typeof item === 'object' && 'process' in item && 'code' in item
+                ) as DataItem[]} 
+                country={pais} 
+              />
+            )}
           </div>
         </div>
       )}
