@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "render-build": "mkdir -p ./app && cp -r ./src/app ./app && next build",
-    "render-start": "next start"
+    "lint": "next lint"
   },
   "dependencies": {
     "@tanstack/react-table": "^8.21.2",
