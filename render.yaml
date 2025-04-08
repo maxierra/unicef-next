@@ -3,7 +3,7 @@ services:
     name: bizland-app
     env: node
     buildCommand: chmod +x ./build.sh && ./build.sh
-    startCommand: npm run start
+    startCommand: npm run render-start
     envVars:
       - key: NODE_ENV
         value: production
