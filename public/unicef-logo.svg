@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100">
+  <rect width="300" height="100" fill="#00aeef" />
+  <path d="M50 20h20v60H50V20zm40 0h20v60H90V20zm40 0h20v60h-20V20zm40 0h20v60h-20V20z" fill="white" />
+  <text x="50" y="95" font-family="Arial, sans-serif" font-size="16" fill="white">for every child</text>
+</svg>
